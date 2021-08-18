@@ -1,13 +1,13 @@
-from selenium import webdriver
 import pytz
 import time
-from time import sleep
 from datetime import datetime
+from capmonster_python import NoCaptchaTaskProxyless
 
 
-def runscript(email, password, browser):
+def runscript(account, sitelogger, browser):
     try:
-        browser.get("https://siswa.smktelkom-mlg.sch.id")
+        print("Current session is {}".format(browser.session_id))
+        browser.get(str(sitelogger[0]))
     except:
         browser.close()
         return False
@@ -18,14 +18,24 @@ def runscript(email, password, browser):
         '//*[@id="form_login"]/div[3]/div/input')
     enter = browser.find_element_by_id('masuk')
 
-    emailinput.send_keys(str(email))
-    passinput.send_keys(str(password))
+    emailinput.send_keys(str(account[0]))
+    passinput.send_keys(str(account[1]))
+
+    # skipcaptcha
+    website_url = browser.current_url
+    captcha = NoCaptchaTaskProxyless(client_key=str(sitelogger[2]))
+    taskId = captcha.createTask(website_url, sitelogger[1])
+    print("# Task created successfully, waiting for the response.")
+    response = captcha.joinTaskResult(taskId)
+    print("# Response received.")
+    browser.execute_script(f"document.getElementsByClassName('g-recaptcha-response')[0].innerHTML = '{response}';")
+    print("# Response injected to secret input.")
+
     enter.click()
-
     time.sleep(2)
+    browser.get(str(sitelogger[3]))
 
-    browser.get("https://siswa.smktelkom-mlg.sch.id/presnow")
-
+    print("# Nunggu jam 06:00AM WIB")
     while True:
         WIB = pytz.timezone('Asia/Jakarta')
         time_now = datetime.now(WIB)
@@ -66,8 +76,8 @@ def logout(browser):
     browser.close()
 
 
-def override(email, password, browser):
+def override(account, sitelogger, browser):
     while True:
-        data = runscript(email, password, browser)
+        data = runscript(account, sitelogger, browser)
         if data == True:
             return True

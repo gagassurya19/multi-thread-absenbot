@@ -26,10 +26,10 @@ def browser():
     chromes.add_argument("--disable-dev-sh-usage")
 
     # Release
-    # browser = webdriver.Chrome(executable_path=os.environ.get(
-    #     "CHROMEDRIVER_PATH"), chrome_options=chromes)
+    browser = webdriver.Chrome(executable_path=os.environ.get(
+        "CHROMEDRIVER_PATH"), chrome_options=chromes)
 
     ## Development
-    browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=chromes)
+    # browser = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver', chrome_options=chromes)
     
     return browser

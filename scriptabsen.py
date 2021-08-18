@@ -32,7 +32,7 @@ def runscript(account, sitelogger, browser):
     print("# Response injected to secret input.")
 
     enter.click()
-    time.sleep(2)
+    # time.sleep(5)
     browser.get(str(sitelogger[3]))
 
     print("# Nunggu jam 06:00AM WIB")

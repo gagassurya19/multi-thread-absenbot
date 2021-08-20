@@ -49,7 +49,8 @@ def runscript(account, sitelogger, browser):
     while True:
         WIB = pytz.timezone('Asia/Jakarta')
         time_now = datetime.now(WIB)
-        if time_now.strftime('%H') == '06' and time_now.strftime('%M') == '00':
+        # if time_now.strftime('%H') == '06' and time_now.strftime('%M') == '00':
+        if True:
             browser.refresh()
             if cek_absen(browser) == False:
                 absen(browser)

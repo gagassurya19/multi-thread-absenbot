@@ -2,6 +2,7 @@ import pytz
 import time
 from datetime import datetime
 from capmonster_python import NoCaptchaTaskProxyless
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def runscript(account, sitelogger, browser):
@@ -29,10 +30,19 @@ def runscript(account, sitelogger, browser):
     response = captcha.joinTaskResult(taskId)
     print("# Response received.")
     browser.execute_script(f"document.getElementsByClassName('g-recaptcha-response')[0].innerHTML = '{response}';")
+    print(response)
     print("# Response injected to secret input.")
 
+    time.sleep(5)
     enter.click()
-    # time.sleep(5)
+
+    try:
+        el = WebDriverWait(browser, timeout=5).until(lambda d: d.find_element_by_tag_name("h2"))
+        assert el.text == "DASHBOARD"
+    except:
+        browser.close()
+        return False
+
     browser.get(str(sitelogger[3]))
 
     print("# Nunggu jam 06:00AM WIB")

@@ -10,7 +10,6 @@ Website_url_absen = "https://siswa.smktelkom-mlg.sch.id/presnow"
 Website_key = "6Lc7NmoUAAAAAJAgPU2_TypLL0H1UG_Fj9vUMl3O"
 Captcha_api = os.environ.get("API")
 
-
 # =====================================
 # DON'T CHANGE THIS SETUP!
 def account():

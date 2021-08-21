@@ -12,7 +12,10 @@ while True:
     WIB = pytz.timezone('Asia/Jakarta')
     time_now = datetime.now(WIB)
 
-    if (time_now.strftime('%H') == '05' and time_now.strftime('%M') == '58'):
+    if (time_now.strftime('%H') == '05' and 
+            time_now.strftime('%M') == '58' and
+            time_now.strftime('%a') != 'Sat' and
+            time_now.strftime('%a') != 'Sun'):
         temp = scriptabsen.runscript(values.account(), values.sitelogger(), values.browser())
         times = datetime.now(WIB)
         if(temp == True):

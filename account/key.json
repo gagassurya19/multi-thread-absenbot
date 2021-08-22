@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "absensi-siakad-323506",
+  "private_key_id": "641305c7de8790f99e36733aa6651b18650bf479",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3EChTL6h/IlO1\nKtzSLNiM/kgCY6j9jk1S5MGVspGl638bFCoZf0QsZXTW35WaVz7fxb+53KwE5BRR\nULUpob3UrkEpHK378+qJMrZ6avQw0E2jSTIotGYPp9ojD/Rl5M4X0MrKVCk3WzYm\n04QpMMvbSWfRTZem1D3X/2XtflE2Drmu3ojJTmGUaJWwQSxviSc4rySujjSevpGR\nVUOj4Tlm2Qo8Y/O5l6HrhgyLzQznjFrSm6wT7hdBu75dKZ7YyHhnQBYVrBmfhUZk\nj7Eoahigb3imnqJ1Y6RS3iT14ldTYKAFCgEVXFto1lcI0GaCfK1JlAUrrUDPo3JP\nwYq7GhifAgMBAAECggEASEmKEucz2xgcA+MsFZZ94JccqkzeU1mY8Q3B37IGz4UB\nyRiaUz0tF3bsv1jEw5CGFGkK/4LDLp894qpDD3B9/Hje5DQeA+rah1jOM+L+EDSB\nI+RoeShbUP1QJx5KvN2wADmDiofXSrOq24QUoQtSxIHlDAJeyxLuZNfGURTbTsOw\nncNtsYHo2X3ytPl45bZkfDm8P4Kx++Y9SEGJf58+AFjHm3dNZTU2coDjPL3rwhkV\n2/GZxKt/Sq2cs2jlLDL/hsd0T9zGI8TT7a2G35pWSaeS5/xi0OvXveeWKt+ggKU1\n3FPGKRJECObmfr842HICrcBwyyJfiWIfY9jb19rhEQKBgQDkBu1EhFbG/iQgZw5h\nqTG7gct7bKKgpZXgvFkk+qDGmWhF7sl8tz2dUv0ksZS8dMIIi+7IwBkmPiTCRfih\nSst+/ZAK7JvyKVgN5+61OTV0xoVreAqU4Huz67iyZ/ZjwyzJi4Ec7kQVbOvzTqox\ne0G+FkxX9b7NEm16jjwpWKj3RwKBgQDNhSk7b7IMX3TwFBXg5FJkwQvgzLpejzil\nIm6+NfDouLLgdDGW2NuW2sycQo0lDRmjLJNAEu+4UfToRry7TkLQ22iSVYSLrxY0\nW1ZNcdwOeq76y/XPRIkL73UZQ06SpZUVOblMfLenwb2BOCEMJaj2x7OEEDiEqDub\nzGZkKD0v6QKBgQC2MJ6kzwQyrF4bEZxZBYF56sO1EuCBcKvmyzaCqEmLRIkezyJn\nplTxfZxLFCPdy4A4qe2YsnulpaNjIdr8rDEZfuj3AYO8IbJ8MeL1IweGDRQPAPOb\nbh0IbX+98/jWTtxbED6R6gG2CLghR6oOLQgjI9fNs8jGO0ID2N9SvccLAwKBgBMd\n38f3i8g62NW8CIzyr/dPPZubb3p8N/ikS0jGG7KJ+5mFNVeitEpD7+RZDGf13/yd\nmNTM7h9nADDa45NIpE5pGkECU2Hq11XnaQ+rF50BLGWHs0WkSlsh2vKOoDBj1ooy\n5FmJAExKaSYr4mcO2biausf9+kPcoi7LxHpsg8SBAoGAArFmUBebcl+ojGCwGay2\nh66nCMaAdFH0tsRN+pQhvmv5rEWRIsh8JuYQEWRRPYIKfjBfHSoo7+BhGH6eqrZQ\nPWsxQQRUew42EENOJFkVJRSC3B49h+VhMkVQQIiyHhx+OuniMhbhn7TtYFjRXbou\nzz/IqUhDUH0a13yktjnpPt0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "absensi-siakad@absensi-siakad-323506.iam.gserviceaccount.com",
+  "client_id": "117928030243802043949",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/absensi-siakad%40absensi-siakad-323506.iam.gserviceaccount.com"
+}

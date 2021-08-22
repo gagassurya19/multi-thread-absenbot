@@ -4,7 +4,7 @@ from google.oauth2 import service_account
 
 SERVICE_ACCOUNT_FILE = './account/key.json'
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-SPREADSHEET_ID = 'YOUR ID SPREADSHEET'
+SPREADSHEET_ID = '1dF4H6Gx2PEKfTtWWIzrmEX5SC9wyTh3IL8mqntI_b_I'
 RANGE_DATA = "Sheet1!A:B"
 
 def getaccount():

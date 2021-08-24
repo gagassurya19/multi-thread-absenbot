@@ -51,8 +51,7 @@ def runscript(account, sitelogger, browser):
         time_now = datetime.now(WIB)
 
         if (time_now.strftime('%H') == '06' and 
-            time_now.strftime('%M') == '00' and 
-            time_now.strftime('%S') == '01'):
+            time_now.strftime('%M') == '00'):
 
             browser.refresh()
             if cek_absen(browser) == False:

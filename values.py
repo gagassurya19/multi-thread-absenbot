@@ -1,9 +1,10 @@
 import os
 from selenium import webdriver
 from fake_useragent import UserAgent
+from fake_useragent import FakeUserAgentError
 
-# change useragent
-useragent = UserAgent()
+
+
 
 # Login Account
 # Email = os.environ.get("EMAIL")
@@ -23,9 +24,15 @@ def sitelogger():
     return Website_url, Website_key, Captcha_api, Website_url_absen
 
 def browser():
+    try:
+        ua = UserAgent()
+        print(ua.data_randomize)
+    except FakeUserAgentError:
+        pass
+
     chromes = webdriver.ChromeOptions()
     chromes.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chromes.add_argument(f"user-agent={useragent.random}")
+    chromes.add_argument(f"user-agent={ua.random}")
     chromes.add_argument("--headless")
     chromes.add_argument("--no-sandbox")
     chromes.add_argument("--disable-dev-sh-usage")

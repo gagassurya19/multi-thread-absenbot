@@ -11,7 +11,7 @@ from fake_useragent import FakeUserAgentError
 Website_url = "https://siswa.smktelkom-mlg.sch.id"
 Website_url_absen = "https://siswa.smktelkom-mlg.sch.id/presnow"
 Website_key = "6Lc7NmoUAAAAAJAgPU2_TypLL0H1UG_Fj9vUMl3O"
-Captcha_api = ""
+Captcha_api = "f363822ea4b23addabb0a1d6b3e537c9"
 
 # =====================================
 # DON'T CHANGE THIS SETUP!

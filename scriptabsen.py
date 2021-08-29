@@ -1,5 +1,6 @@
 import pytz
 import time
+import random
 from datetime import datetime
 from capmonster_python import NoCaptchaTaskProxyless
 from selenium.webdriver.support.ui import WebDriverWait
@@ -23,6 +24,7 @@ def runscript(account, sitelogger, browser):
     passinput.send_keys(str(account[1]))
 
     # skipcaptcha
+    print("# Captcha bypass")
     website_url = browser.current_url
     captcha = NoCaptchaTaskProxyless(client_key=str(sitelogger[2]))
     taskId = captcha.createTask(website_url, sitelogger[1])
@@ -30,14 +32,13 @@ def runscript(account, sitelogger, browser):
     response = captcha.joinTaskResult(taskId)
     print("# Response received.")
     browser.execute_script(f"document.getElementsByClassName('g-recaptcha-response')[0].innerHTML = '{response}';")
-    print(response)
     print("# Response injected to secret input.")
 
     time.sleep(5)
     enter.click()
 
     try:
-        el = WebDriverWait(browser, timeout=5).until(lambda d: d.find_element_by_tag_name("h2"))
+        el = WebDriverWait(browser, timeout=10).until(lambda d: d.find_element_by_tag_name("h2"))
         assert el.text == "DASHBOARD"
     except:
         browser.close()
@@ -45,12 +46,14 @@ def runscript(account, sitelogger, browser):
 
     browser.get(str(sitelogger[3]))
 
-    print("# Nunggu jam 06:00AM WIB")
+    randomSecond = str(random.randint(0,15))
+    print(f"[{str(account[0])}] Nunggu jam 06:00:{randomSecond}AM WIB")
     while True:
         WIB = pytz.timezone('Asia/Jakarta')
         time_now = datetime.now(WIB)
         if (time_now.strftime('%H') == '06' and 
-            time_now.strftime('%M') == '00'):
+            time_now.strftime('%M') >= '00'and 
+            time_now.strftime('%S') >= randomSecond):
             browser.refresh()
             if cek_absen(browser) == False:
                 absen(browser)
@@ -85,10 +88,3 @@ def cek_absen(browser):
 def logout(browser):
     browser.get("https://siswa.smktelkom-mlg.sch.id/login/logout")
     browser.close()
-
-
-def override(account, sitelogger, browser):
-    while True:
-        data = runscript(account, sitelogger, browser)
-        if data == True:
-            return True

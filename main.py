@@ -2,12 +2,28 @@ from pyasn1.type.univ import Null
 import scriptabsen
 import values
 from account.getaccount import getaccount
+from discord import sendMessage
 import pytz
 from time import time, sleep
 from datetime import datetime
 import concurrent.futures
 
-# CHOOSE SHEET
+
+# TIME-SECTION
+WIB = pytz.timezone('Asia/Jakarta')
+def setTimer(setTime):
+    while True: 
+        format = '%H:%M:%S'
+        now = (datetime.now(WIB)).strftime(format)
+        tomorrow = setTime
+        timeRemain = datetime.strptime(tomorrow, format) - datetime.strptime(now, format)
+        print(">Time now: ", now, " | Time remaining: ", timeRemain, " | Start at ", tomorrow, end="\r")
+        sleep(1)
+        if(now == tomorrow):
+            break 
+
+
+# CHOOSE-SHEET-SECTION
 isAccount = Null
 while (isAccount == Null):
     sheet = str(input('Masukkan sheet: '))
@@ -22,51 +38,57 @@ while (isAccount == Null):
     else:
         print("[Error] Sheet tidak ditemukan")
 
-# TIME SECTION
-WIB = pytz.timezone('Asia/Jakarta')
-time_now = datetime.now(WIB)
-def setTimer(setTime):
-    while True: 
-        format = '%H:%M:%S'
-        now = (datetime.now(WIB)).strftime(format)
-        tomorrow = setTime
-        timeRemain = datetime.strptime(tomorrow, format) - datetime.strptime(now, format)
-        print(">Time now: ", now, " | Time remaining: ",timeRemain, " | Start at ", tomorrow, end="\r")
-        sleep(1)
-        if(now == tomorrow):
-            break 
 
-# SET READY
-setTimer("05:50:00")
-print("\nREADY!")
-
-# RUN
+# RUN-SECTION
 while True:
+    # SET-READY
+    setTimer("05:55:00")
+    print("\nREADY!", end="\r")
+    
+    # RUN-AT-05:50AM
     sleep(5 - time() % 5)
+    time_now = datetime.now(WIB)
     if (time_now.strftime('%H') == '05' and 
-            time_now.strftime('%M') == '50' and
+            time_now.strftime('%M') >= '55' and
             time_now.strftime('%a') != 'Sat' and
             time_now.strftime('%a') != 'Sun'):
+        start = datetime.now()
+
+        # RUN-SECTION
+        time_now_message = datetime.now(WIB)
+        sendMessage.info(time_now_message.strftime("%Y/%m/%d"), len(accountsheet), sheet)
         def run(account):
-            print("[NEW THREAD]")
+            # DISCORD-SECTION
+            user = account[0] # get email
+            username = user[0].upper() + user[1:].split('_', 2)[1] # Split
+            
+            # RUN-SCRIPTABSEN.PY
             temp = scriptabsen.runscript(account, values.sitelogger(), values.browser())
             times = datetime.now(WIB)
             if(temp == True):
-                print("Absen berhasil pada " + times.strftime('%c'))
+                sendMessage.success(username, times.strftime('%c')) # DISCORD
+                print("[] Absen berhasil pada " + times.strftime('%c')) # CONSOLE
             elif(temp == False):
-                print("Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi " +
-                        times.strftime('%c'))
-                ass = scriptabsen.override(account, values.sitelogger(), values.browser())
+                sendMessage.warning(username, "Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi", times.strftime('%c')) # DISCORD
+                print("[] Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi " + times.strftime('%c')) # CONSOLE
+                ass = scriptabsen.runscript(account, values.sitelogger(), values.browser())
+                timee = datetime.now(WIB)
                 if ass == True:
-                    timee = datetime.now(WIB)
-                    print("Absen berhasil pada " + timee.strftime('%c'))
+                    sendMessage.success(username, timee.strftime('%c')) # DISCORD
+                    print("[] Absen berhasil pada " + timee.strftime('%c')) # CONSOLE
                 else:
-                    print("Gagal akses website")
+                    sendMessage.failed(username, timee.strftime('%c')) # DISCORD
+                    print("[] Gagal akses website") # CONSOLE
             else:
-                print("Server-mu Down " + times.strftime('%c'))
+                sendMessage.failed(username, times.strftime('%c')) # DISCORD
+                print("[] Server-mu Down " + times.strftime('%c'))
+
+        # MULTI-THREAD-SECTION
         if __name__ == '__main__':
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                # data account
-                accounts = accountsheet
-                results = executor.map(run, accounts)
-        print(f'finished')
+            with concurrent.futures.ThreadPoolExecutor(max_workers=len(accountsheet)) as executor:
+                results = executor.map(run, accountsheet)
+
+        #END
+        end = datetime.now() - start
+        print(f'finished in {end}')
+        sendMessage.done(f"Goodluck ^_^ | Finish in {end}s") # DISCORD

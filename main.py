@@ -42,14 +42,14 @@ while (isAccount == Null):
 # RUN-SECTION
 while True:
     # SET-READY
-    setTimer("05:55:00")
+    setTimer("10:25:00")
     print("\nREADY!", end="\r")
     
     # RUN-AT-05:50AM
     sleep(5 - time() % 5)
     time_now = datetime.now(WIB)
-    if (time_now.strftime('%H') == '05' and 
-            time_now.strftime('%M') >= '55' and
+    if (time_now.strftime('%H') == '10' and 
+            time_now.strftime('%M') >= '25' and
             time_now.strftime('%a') != 'Sat' and
             time_now.strftime('%a') != 'Sun'):
         start = datetime.now()
@@ -67,21 +67,21 @@ while True:
             times = datetime.now(WIB)
             if(temp == True):
                 sendMessage.success(username, times.strftime('%c')) # DISCORD
-                print("[] Absen berhasil pada " + times.strftime('%c')) # CONSOLE
+                print(f"[{username}] Absen berhasil pada " + times.strftime('%c')) # CONSOLE
             elif(temp == False):
                 sendMessage.warning(username, "Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi", times.strftime('%c')) # DISCORD
-                print("[] Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi " + times.strftime('%c')) # CONSOLE
+                print(f"[{username}] Absen gagal, SERVER SEKOLAH KENTANK, mencoba lagi " + times.strftime('%c')) # CONSOLE
                 ass = scriptabsen.runscript(account, values.sitelogger(), values.browser())
                 timee = datetime.now(WIB)
                 if ass == True:
                     sendMessage.success(username, timee.strftime('%c')) # DISCORD
-                    print("[] Absen berhasil pada " + timee.strftime('%c')) # CONSOLE
+                    print(f"[{username}] Absen berhasil pada " + timee.strftime('%c')) # CONSOLE
                 else:
                     sendMessage.failed(username, timee.strftime('%c')) # DISCORD
-                    print("[] Gagal akses website") # CONSOLE
+                    print(f"[{username}] Gagal akses website") # CONSOLE
             else:
                 sendMessage.failed(username, times.strftime('%c')) # DISCORD
-                print("[] Server-mu Down " + times.strftime('%c'))
+                print(f"[{username}] Server-mu Down " + times.strftime('%c'))
 
         # MULTI-THREAD-SECTION
         if __name__ == '__main__':

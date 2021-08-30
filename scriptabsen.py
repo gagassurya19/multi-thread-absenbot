@@ -7,8 +7,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def runscript(account, sitelogger, browser):
+    # USERNAME
+    user = account[0]
+    username = user[0].upper() + user[1:].split('_', 2)[1]
+
     try:
-        print("Current session is {}".format(browser.session_id))
+        print("# [{}] Current session is {}".format(username, browser.session_id))
         browser.get(str(sitelogger[0]))
     except:
         browser.close()
@@ -24,15 +28,15 @@ def runscript(account, sitelogger, browser):
     passinput.send_keys(str(account[1]))
 
     # skipcaptcha
-    print("# Captcha bypass")
+    print(f"# [{username}] Captcha bypass")
     website_url = browser.current_url
     captcha = NoCaptchaTaskProxyless(client_key=str(sitelogger[2]))
     taskId = captcha.createTask(website_url, sitelogger[1])
-    print("# Task created successfully, waiting for the response.")
+    # print("# Task created successfully, waiting for the response.")
     response = captcha.joinTaskResult(taskId)
-    print("# Response received.")
+    # print("# Response received.")
     browser.execute_script(f"document.getElementsByClassName('g-recaptcha-response')[0].innerHTML = '{response}';")
-    print("# Response injected to secret input.")
+    print(f"# [{username}] Response injected to secret input.")
 
     time.sleep(5)
     enter.click()
@@ -46,14 +50,12 @@ def runscript(account, sitelogger, browser):
 
     browser.get(str(sitelogger[3]))
 
-    randomSecond = str(random.randint(0,15))
-    print(f"[{str(account[0])}] Nunggu jam 06:00:{randomSecond}AM WIB")
+    print(f"# [{username}] Nunggu jam 06:00AM WIB")
     while True:
         WIB = pytz.timezone('Asia/Jakarta')
         time_now = datetime.now(WIB)
         if (time_now.strftime('%H') == '06' and 
-            time_now.strftime('%M') >= '00'and 
-            time_now.strftime('%S') >= randomSecond):
+            time_now.strftime('%M') >= '00'):
             browser.refresh()
             if cek_absen(browser) == False:
                 absen(browser)

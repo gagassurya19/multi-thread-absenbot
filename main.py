@@ -42,14 +42,14 @@ while (isAccount == Null):
 # RUN-SECTION
 while True:
     # SET-READY
-    setTimer("10:25:00")
+    setTimer("05:50:00")
     print("\nREADY!", end="\r")
     
     # RUN-AT-05:50AM
     sleep(5 - time() % 5)
     time_now = datetime.now(WIB)
-    if (time_now.strftime('%H') == '10' and 
-            time_now.strftime('%M') >= '25' and
+    if (time_now.strftime('%H') == '05' and 
+            time_now.strftime('%M') >= '50' and
             time_now.strftime('%a') != 'Sat' and
             time_now.strftime('%a') != 'Sun'):
         start = datetime.now()
